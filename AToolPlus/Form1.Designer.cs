@@ -62,6 +62,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.BtnSend = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCom = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -74,6 +77,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -87,7 +91,7 @@
             // 退出
             // 
             this.退出.Name = "退出";
-            this.退出.Size = new System.Drawing.Size(270, 34);
+            this.退出.Size = new System.Drawing.Size(146, 34);
             this.退出.Text = "退出";
             // 
             // menuStrip1
@@ -118,28 +122,28 @@
             // MenuSendAppendRN
             // 
             this.MenuSendAppendRN.Name = "MenuSendAppendRN";
-            this.MenuSendAppendRN.Size = new System.Drawing.Size(270, 34);
+            this.MenuSendAppendRN.Size = new System.Drawing.Size(200, 34);
             this.MenuSendAppendRN.Text = "加回车换行";
             this.MenuSendAppendRN.Click += new System.EventHandler(this.MenuSendAppendRN_Click);
             // 
             // MenuSendATString
             // 
             this.MenuSendATString.Name = "MenuSendATString";
-            this.MenuSendATString.Size = new System.Drawing.Size(270, 34);
+            this.MenuSendATString.Size = new System.Drawing.Size(200, 34);
             this.MenuSendATString.Text = "字符串发送";
             this.MenuSendATString.Click += new System.EventHandler(this.MenuSendATString_Click);
             // 
             // MenuSendHex
             // 
             this.MenuSendHex.Name = "MenuSendHex";
-            this.MenuSendHex.Size = new System.Drawing.Size(270, 34);
+            this.MenuSendHex.Size = new System.Drawing.Size(200, 34);
             this.MenuSendHex.Text = "HEX发送";
             this.MenuSendHex.Click += new System.EventHandler(this.MenuSendHex_Click);
             // 
             // MenuSendCycle
             // 
             this.MenuSendCycle.Name = "MenuSendCycle";
-            this.MenuSendCycle.Size = new System.Drawing.Size(270, 34);
+            this.MenuSendCycle.Size = new System.Drawing.Size(200, 34);
             this.MenuSendCycle.Text = "循环发送";
             this.MenuSendCycle.Click += new System.EventHandler(this.MenuSendCycle_Click);
             // 
@@ -160,28 +164,28 @@
             this.MenuRecvShowTime.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MenuRecvShowTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.MenuRecvShowTime.Name = "MenuRecvShowTime";
-            this.MenuRecvShowTime.Size = new System.Drawing.Size(270, 34);
+            this.MenuRecvShowTime.Size = new System.Drawing.Size(236, 34);
             this.MenuRecvShowTime.Text = "显示接收时间";
             this.MenuRecvShowTime.Click += new System.EventHandler(this.MenuRecvShowTime_Click);
             // 
             // MenuRecvAutoLine
             // 
             this.MenuRecvAutoLine.Name = "MenuRecvAutoLine";
-            this.MenuRecvAutoLine.Size = new System.Drawing.Size(270, 34);
+            this.MenuRecvAutoLine.Size = new System.Drawing.Size(236, 34);
             this.MenuRecvAutoLine.Text = "自动换行";
             this.MenuRecvAutoLine.Click += new System.EventHandler(this.MenuRecvAutoLine_Click);
             // 
             // MenuRecvShowHex
             // 
             this.MenuRecvShowHex.Name = "MenuRecvShowHex";
-            this.MenuRecvShowHex.Size = new System.Drawing.Size(270, 34);
+            this.MenuRecvShowHex.Size = new System.Drawing.Size(236, 34);
             this.MenuRecvShowHex.Text = "十六进制显示";
             this.MenuRecvShowHex.Click += new System.EventHandler(this.MenuRecvShowHex_Click);
             // 
             // MenuRecvSaveLog
             // 
             this.MenuRecvSaveLog.Name = "MenuRecvSaveLog";
-            this.MenuRecvSaveLog.Size = new System.Drawing.Size(270, 34);
+            this.MenuRecvSaveLog.Size = new System.Drawing.Size(236, 34);
             this.MenuRecvSaveLog.Text = "数据保存到文件";
             this.MenuRecvSaveLog.Click += new System.EventHandler(this.MenuRecvSaveLog_Click);
             // 
@@ -191,7 +195,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(554, 574);
+            this.richTextBox1.Size = new System.Drawing.Size(554, 556);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -325,7 +329,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(562, 542);
+            this.tabPage1.Size = new System.Drawing.Size(562, 524);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "字符串发送";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -340,7 +344,7 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(556, 536);
+            this.listView1.Size = new System.Drawing.Size(556, 518);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -354,7 +358,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(570, 574);
+            this.tabControl1.Size = new System.Drawing.Size(570, 556);
             this.tabControl1.TabIndex = 1;
             // 
             // splitContainer1
@@ -372,7 +376,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1128, 574);
+            this.splitContainer1.Size = new System.Drawing.Size(1128, 556);
             this.splitContainer1.SplitterDistance = 554;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -380,7 +384,7 @@
             // 
             this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.Location = new System.Drawing.Point(12, 651);
+            this.splitContainer2.Location = new System.Drawing.Point(12, 633);
             this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -391,7 +395,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.richTextBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(1128, 198);
+            this.splitContainer2.Size = new System.Drawing.Size(1128, 171);
             this.splitContainer2.SplitterDistance = 292;
             this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 4;
@@ -404,7 +408,7 @@
             this.BtnSend.Location = new System.Drawing.Point(0, 0);
             this.BtnSend.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSend.Name = "BtnSend";
-            this.BtnSend.Size = new System.Drawing.Size(292, 198);
+            this.BtnSend.Size = new System.Drawing.Size(292, 171);
             this.BtnSend.TabIndex = 0;
             this.BtnSend.Text = "发  送";
             this.BtnSend.UseVisualStyleBackColor = true;
@@ -416,16 +420,41 @@
             this.richTextBox2.Location = new System.Drawing.Point(0, 0);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(830, 198);
+            this.richTextBox2.Size = new System.Drawing.Size(830, 171);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = "";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelCom});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 813);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1153, 31);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(180, 24);
+            this.toolStripStatusLabel1.Text = "版本号：v1.0.2.1102";
+            // 
+            // toolStripStatusLabelCom
+            // 
+            this.toolStripStatusLabelCom.Name = "toolStripStatusLabelCom";
+            this.toolStripStatusLabelCom.Size = new System.Drawing.Size(75, 24);
+            this.toolStripStatusLabelCom.Text = "             ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1153, 862);
+            this.ClientSize = new System.Drawing.Size(1153, 844);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -448,6 +477,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,6 +519,9 @@
         private System.Windows.Forms.ToolStripMenuItem MenuSendCycle;
         private System.Windows.Forms.ToolStripMenuItem MenuRecvSaveLog;
         private System.Windows.Forms.Button BtnSend;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCom;
     }
 }
 

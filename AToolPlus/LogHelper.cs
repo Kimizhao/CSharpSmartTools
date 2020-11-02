@@ -204,7 +204,7 @@ namespace AToolPlus
 
             FileTarget fileTarget = new FileTarget();
             logConfig.AddTarget("logFile", fileTarget);
-            fileTarget.FileName = logPath + "/${shortdate}_${level}.txt";
+            fileTarget.FileName = logPath + "/${shortdate}.txt";
             fileTarget.MaxArchiveFiles = int.MaxValue;
             fileTarget.ArchiveFileName = logPath + @"/archives/${shortdate}_{#####}.txt";
             fileTarget.ArchiveNumbering = ArchiveNumberingMode.Rolling;

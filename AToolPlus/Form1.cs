@@ -25,7 +25,7 @@ namespace AToolPlus
         private CancellationToken token;
         private Task sendCycleTask = null;
 
-
+        private bool ManuCancel = false;
         public Form1()
         {
             InitializeComponent();
@@ -198,7 +198,7 @@ namespace AToolPlus
             StringBuilder outputSb = new StringBuilder();
             if (configInfo.RecvShowTime)
             {
-                string dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff");
+                string dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
                 outputSb.Append("[");
                 outputSb.Append(dateTime);
                 outputSb.Append("]");
@@ -233,9 +233,46 @@ namespace AToolPlus
             DelegateControls.SetRichText(this, this.richTextBox1, Color.Yellow, content, true, false);
         }
 
-        private void LogError(string content)
+        private void LogError(string content, int dir = AToolConstants.LOG_NONE)
         {
-            DelegateControls.SetRichText(this, this.richTextBox1, Color.Red, content, true, false);
+            StringBuilder outputSb = new StringBuilder();
+            if (configInfo.RecvShowTime)
+            {
+                string dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                outputSb.Append("[");
+                outputSb.Append(dateTime);
+                outputSb.Append("]");
+                if (dir == AToolConstants.LOG_RECV)
+                {
+                    outputSb.Append("收<-");
+                }
+                else if (dir == AToolConstants.LOG_SEND)
+                {
+                    outputSb.Append("发<-");
+                }
+                else if (dir == AToolConstants.LOG_NONE)
+                {
+
+                }
+            }
+
+            outputSb.Append(content);
+
+            DelegateControls.SetRichText(this, this.richTextBox1, Color.Black, outputSb.ToString(), true, false);
+
+            if (dir != AToolConstants.LOG_NONE)
+            {
+                outputSb.Remove(0, 25);
+            }
+
+            DelegateControls.SetRichText(this, this.richTextBox1, Color.Red, outputSb.ToString(), true, false);
+
+            if (dir != AToolConstants.LOG_NONE)
+            {
+                outputSb.Remove(0, 25);
+            }
+
+            LogHelper.Error(outputSb.ToString());
         }
 
         private void LogSend(string content)
@@ -389,6 +426,7 @@ namespace AToolPlus
                     this.toolStripCmbPort.Enabled = false;
                     this.toolStripCmbBaud.Enabled = false;
                     LogInformation($"串口{this.toolStripCmbPort.Text}打开");
+                    toolStripStatusLabelCom.Text = $"串口{this.toolStripCmbPort.Text}打开";
                 }
                 else
                 {
@@ -396,6 +434,7 @@ namespace AToolPlus
                     this.toolStripCmbPort.Enabled = true;
                     this.toolStripCmbBaud.Enabled = true;
                     LogInformation($"串口{this.toolStripCmbPort.Text}关闭");
+                    toolStripStatusLabelCom.Text = $"串口{this.toolStripCmbPort.Text}关闭";
                 }
             }
             catch (System.IO.FileNotFoundException ex)
@@ -615,9 +654,16 @@ namespace AToolPlus
                                 SendData(System.Text.Encoding.Default.GetBytes(sb.ToString()), item.Hex);
                             }));
 
+                            if (ManuCancel)
+                            {
+                                break;
+                            }
+
                             Thread.Sleep(item.DelayMicroSeconds);
                         }
                     }
+
+                    ManuCancel = false;
                 }
             }, token);
 
@@ -628,10 +674,12 @@ namespace AToolPlus
         {
             if (sendCycleTask != null)
             {
+                ManuCancel = true;
                 cancellationTokenSource.Cancel();
                 sendCycleTask.Wait();
 
-
+                sendCycleTask = null;
+                cancellationTokenSource = null;
                 LogInformation("循环发送任务停止");
             }
         }
