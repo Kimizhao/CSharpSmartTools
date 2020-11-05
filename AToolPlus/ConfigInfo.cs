@@ -44,5 +44,15 @@ namespace AToolPlus
         /// AT指令文件
         /// </summary>
         public string AtCommandFile { get; set; }
+
+        /// <summary>
+        /// 串口号
+        /// </summary>
+        public string Port { get; set; } = "COM3";
+
+        /// <summary>
+        /// 波特率
+        /// </summary>
+        public string Baud { get; set; } = "115200";
     }
 }

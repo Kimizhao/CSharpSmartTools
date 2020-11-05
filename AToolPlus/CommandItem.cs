@@ -19,15 +19,15 @@ namespace AToolPlus
         /// <summary>
         /// 命令名称
         /// </summary>
-        public String CommandName { get; set; }
+        public string CommandName { get; set; }
         /// <summary>
         /// 命令类型
         /// </summary>
-        public String Type { get; set; } = "SET";
+        public string Type { get; set; } = "SET";
         /// <summary>
         /// 描述
         /// </summary>
-        public String Description { get; set; }
+        public string Description { get; set; }
         /// <summary>
         /// 延时毫秒
         /// </summary>
@@ -35,7 +35,7 @@ namespace AToolPlus
         /// <summary>
         /// 出错时处理方式
         /// </summary>
-        public String OnError { get; set; } = "RETURN";
+        public string OnError { get; set; } = "RETURN";
 
     }
 }

@@ -176,11 +176,41 @@ namespace AToolPlus
 
             if (this.toolStripCmbPort.Items.Count > 0)
             {
-                this.toolStripCmbPort.SelectedIndex = 0;
+                if (string.IsNullOrEmpty(configInfo.Port))
+                {
+                    this.toolStripCmbPort.SelectedIndex = 0;
+                }
+                else
+                {
+                    int index = this.toolStripCmbPort.FindString(configInfo.Port);
+                    if (index != -1)
+                    {
+                        this.toolStripCmbPort.SelectedIndex = index;
+                    }
+                    else
+                    {
+                        this.toolStripCmbPort.SelectedIndex = 0;
+                    }
+                }
             }
             if (this.toolStripCmbBaud.Items.Count > 0)
             {
-                this.toolStripCmbBaud.SelectedIndex = 1;
+                if (string.IsNullOrEmpty(configInfo.Baud))
+                {
+                    this.toolStripCmbBaud.SelectedIndex = this.toolStripCmbBaud.FindString("115200");
+                }
+                else
+                {
+                    int index = this.toolStripCmbBaud.FindString(configInfo.Baud);
+                    if (index != -1)
+                    {
+                        this.toolStripCmbBaud.SelectedIndex = index;
+                    }
+                    else
+                    {
+                        this.toolStripCmbBaud.SelectedIndex = 0;
+                    }
+                }
             }
         }
 
@@ -350,7 +380,7 @@ namespace AToolPlus
 
             listView1.Focus();
 
-            LogInformation("上移");
+            //LogInformation("上移");
         }
         private void toolStripBtnDown_Click(object sender, EventArgs e)
         {
@@ -370,7 +400,7 @@ namespace AToolPlus
 
             listView1.Focus();
 
-            LogInformation("下移");
+            //LogInformation("下移");
         }
 
         /// <summary>
@@ -541,9 +571,16 @@ namespace AToolPlus
 
         private void MenuSendCycle_Click(object sender, EventArgs e)
         {
+
             this.MenuSendCycle.Checked = !this.MenuSendCycle.Checked;
             configInfo.SendCycle = this.MenuSendCycle.Checked;
-            
+
+            if (!SerialConnection.Instance.IsOpened())
+            {
+                MessageBox.Show("通信口未打开", this.Text, MessageBoxButtons.OK);
+                return;
+            }
+
             if (configInfo.SendCycle)
             {
                 RunSendCycleTask();
@@ -578,6 +615,13 @@ namespace AToolPlus
         {
             try
             {
+
+                if (!SerialConnection.Instance.IsOpened())
+                {
+                    MessageBox.Show("通信口未打开", this.Text, MessageBoxButtons.OK);
+                    return;
+                }
+
                 if (configInfo.SendATString)
                 {
                     if (this.listView1.SelectedItems.Count == 1)
@@ -718,6 +762,21 @@ namespace AToolPlus
             }
 
             listView1.Focus();
+        }
+
+        private void toolStripCmbPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            configInfo.Port = this.toolStripCmbPort.Text;
+            //LogInformation(this.toolStripCmbPort.Text);
+        }
+
+        private void toolStripCmbBaud_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            {
+                configInfo.Baud = this.toolStripCmbBaud.Text;
+                //LogInformation(this.toolStripCmbBaud.Text);
+            }
+
         }
     }
 }
