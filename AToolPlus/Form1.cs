@@ -75,11 +75,16 @@ namespace AToolPlus
             try
             {
                 string fp = System.Windows.Forms.Application.StartupPath + "\\appSettings.json";
-                configInfo = JsonConvert.DeserializeObject<ConfigInfo>(File.ReadAllText(fp));
+
+                if (File.Exists(fp))  // 判断是否已有相同文件
+                {
+                    configInfo = JsonConvert.DeserializeObject<ConfigInfo>(File.ReadAllText(fp));
+                }
+
             }
             catch (Exception ex)
             {
-                LogError(ex.ToString());
+                LogError($"配置文件解析错误：{ex.ToString()}");
             }
         }
 
@@ -98,7 +103,7 @@ namespace AToolPlus
             }
             catch (Exception ex)
             {
-                LogError(ex.ToString());
+                LogError($"配置文件保存错误：{ex.ToString()}");
             }
         }
 
@@ -114,11 +119,16 @@ namespace AToolPlus
                     configInfo.AtCommandFile = System.Windows.Forms.Application.StartupPath + "\\at-command.json";
                 }
 
-                cmdItemLst = JsonConvert.DeserializeObject<List<CommandItem>>(File.ReadAllText(configInfo.AtCommandFile));
+                if (File.Exists(configInfo.AtCommandFile))
+                { 
+                    cmdItemLst = JsonConvert.DeserializeObject<List<CommandItem>>(File.ReadAllText(configInfo.AtCommandFile));
+                }
             }
             catch (Exception ex)
             {
-                LogError(ex.ToString());
+                LogError($"多字符串文件解析错误，请重新加载或检查文件格式。{ex.ToString()}");
+                MessageBox.Show("多字符串文件解析错误，请重新加载或检查文件格式。", this.Text, MessageBoxButtons.OK);
+
             }
         }
 
@@ -133,6 +143,12 @@ namespace AToolPlus
                 foreach (ListViewItem lvi in this.listView1.Items)
                 {
                     items.Add((CommandItem)lvi.Tag);
+                }
+
+                if (items.Count == 0)
+                {
+                    LogHelper.Warn($"多字符串列表为空，不保存。");
+                    return;
                 }
 
                 if (string.IsNullOrEmpty(configInfo.AtCommandFile))
@@ -150,7 +166,7 @@ namespace AToolPlus
             }
             catch (Exception ex)
             {
-                LogError(ex.ToString());
+                LogError($"多字符串文件保存错误：{ex.ToString()}");
             }
         }
 
@@ -686,5 +702,22 @@ namespace AToolPlus
 
 
         #endregion
+
+        private void toolStripBtnDelete_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[0].Index != 0)
+            {
+                listView1.BeginUpdate();
+                foreach (ListViewItem lvi in listView1.SelectedItems)
+                {
+                    ListViewItem item = lvi;
+                    int index = lvi.Index;
+                    listView1.Items.RemoveAt(index);
+                }
+                listView1.EndUpdate();
+            }
+
+            listView1.Focus();
+        }
     }
 }
